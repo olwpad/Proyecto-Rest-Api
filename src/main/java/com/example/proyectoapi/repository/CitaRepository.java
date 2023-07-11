@@ -1,2 +1,8 @@
-package com.example.proyectoapi.repository;public class CitaRepository {
+package com.example.proyectoapi.repository;
+
+import com.example.proyectoapi.model.Cita;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface CitaRepository extends MongoRepository<Cita, String> {
+
 }
