@@ -11,7 +11,6 @@ public class Doctor {
     private String id;
     private String nombres;
     private String apellidos;
-    private String numeroDeCedula;
     private String especialidad;
     private String consultorio;
     private String email;

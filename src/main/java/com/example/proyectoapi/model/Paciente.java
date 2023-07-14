@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Paciente{
     @Id
     private String id;
-    private String numeroDeCedula;
     private String nombres;
     private String apellidos;
     private String email;
