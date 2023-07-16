@@ -26,7 +26,8 @@ public class DoctorService {
                     return ResponseEntity.badRequest().body("El DOCTOR YA ESTÁ REGISTRADO");
                 } else {
                     doctorRepository.save(doctor);
-                    return ResponseEntity.ok().build();
+                    return ResponseEntity.ok().body("Doctor agregado exitosamente");
+
                 }
 
             } catch (Exception e) {
@@ -34,15 +35,30 @@ public class DoctorService {
             }
         }
 
-        // ...
 
-
-    public List<Doctor> findAll(){
-        return doctorRepository.findAll();
+    public ResponseEntity<?> findAll() {
+        try {
+            List<Doctor> doctores = doctorRepository.findAll();
+            if (doctores.isEmpty()) {
+                return ResponseEntity.badRequest().body("No se encontraron doctores");
+            }
+            return ResponseEntity.ok(doctores);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
-    public Optional<Doctor> findById(String id) {
-        return  doctorRepository.findById(id);
+
+    public ResponseEntity<?> findById(String id) {
+        try {
+            Optional<Doctor> doctor = doctorRepository.findById(id);
+            if (doctor.isEmpty()) {
+                return ResponseEntity.badRequest().body("No se encontro Doctor");
+            }
+            return ResponseEntity.ok(doctor);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     public ResponseEntity deleteById(String id) {
@@ -53,7 +69,7 @@ public class DoctorService {
                     return ResponseEntity.badRequest().body("No puedes borrar doctor porque tiene citas pendientes");
                 } else {
                     doctorRepository.deleteById(id);
-                    return ResponseEntity.ok().build();
+                    return ResponseEntity.ok().body(" Doctor Eliminado  correctamente");
                 }
 
             }catch (Exception e) {
@@ -78,10 +94,10 @@ public class DoctorService {
                 } else {
                     return ResponseEntity.badRequest().body("El doctor no existe");
                 }
-                return ResponseEntity.ok().build();
+                return ResponseEntity.ok().body("Doctor editado correctamente");
             }
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar al paciente", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar al Doctor", e);
         }
     }
 

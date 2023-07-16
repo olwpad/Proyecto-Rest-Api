@@ -7,14 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1")
 public class DoctorController {
     private final DoctorService doctorService;
-    @PostMapping("/doctores")
+    @PostMapping("/doctor")
     public ResponseEntity save( @RequestBody Doctor doctor){
         ResponseEntity<?> response;
         try {
@@ -24,13 +22,31 @@ public class DoctorController {
         }
         return response;
     }
+
     @GetMapping("/doctores")
-    public List<Doctor> findAll(){
-        return doctorService.findAll();
+    public ResponseEntity<?> findAll() {
+        ResponseEntity<?> response;
+        try {
+            response =  doctorService.findAll();
+
+        } catch (Exception e) {
+          response= ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        return response;
     }
+
+
+
     @GetMapping("/doctor/{id}")
-    public Doctor findById(@PathVariable  String id){
-        return doctorService.findById(id).get();
+    public ResponseEntity findById(@PathVariable String id){
+        ResponseEntity<?> response;
+        try {
+            response = ResponseEntity.ok(doctorService.findById(id).getBody());
+        }  catch (Exception e) {
+            response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        return response;
+
     }
     @DeleteMapping("/doctor/{id}")
     public ResponseEntity deleteById(@PathVariable String id){
@@ -43,7 +59,7 @@ public class DoctorController {
         return response;
     }
 
-    @PutMapping("/doctores")
+    @PutMapping("/doctor")
     public ResponseEntity update(@RequestBody Doctor doctor){
         ResponseEntity<?> response;
         try {

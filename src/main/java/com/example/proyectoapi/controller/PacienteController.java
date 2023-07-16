@@ -7,14 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class PacienteController {
     private final PacienteService pacienteService;
-    @PostMapping("/pacientes")
+    @PostMapping("/paciente")
     public  ResponseEntity save(@RequestBody Paciente paciente){
             ResponseEntity<?> response;
             try {
@@ -28,12 +26,27 @@ public class PacienteController {
 
 
     @GetMapping("/pacientes")
-    public List<Paciente> findAll(){
-        return  pacienteService.findAll();
+    public ResponseEntity<?> findAll() {
+        ResponseEntity<?> response;
+        try {
+            response =  pacienteService.findAll();
+
+        } catch (Exception e) {
+            response= ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        return response;
     }
+
+
     @GetMapping("/paciente/{id}")
-    public Paciente findById(@PathVariable String id){
-        return pacienteService.findById(id).get();
+    public ResponseEntity findById(@PathVariable String id){
+        ResponseEntity<?> response;
+        try {
+            response = ResponseEntity.ok(pacienteService.findById(id).getBody());
+        }  catch (Exception e) {
+            response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        return response;
 
     }
     @DeleteMapping ("/paciente/{id}")
@@ -46,7 +59,7 @@ public class PacienteController {
         }
         return response;
     }
-    @PutMapping("/pacientes")
+    @PutMapping("/paciente")
     public ResponseEntity update(@RequestBody Paciente paciente){
         ResponseEntity<?> response;
         try {

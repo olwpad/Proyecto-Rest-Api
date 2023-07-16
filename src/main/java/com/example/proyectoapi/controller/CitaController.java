@@ -7,8 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1")
@@ -16,7 +14,7 @@ public class CitaController {
     private final  CitaService citaService;
 
 
-    @PostMapping("/citas")
+    @PostMapping("/cita")
     public ResponseEntity<?> save(@RequestBody Cita cita) {
         ResponseEntity<?> response;
         try {
@@ -27,19 +25,39 @@ public class CitaController {
         return response;
     }
     @GetMapping("/citas")
-    public List<Cita> findAll(){
-        return citaService.findAll();
+    public ResponseEntity<?> findAll() {
+        ResponseEntity<?> response;
+        try {
+            response =  citaService.findAll();
+
+        } catch (Exception e) {
+            response= ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        return response;
     }
     @GetMapping("/cita/{id}")
-    public Cita findById(@PathVariable String id){
-        return citaService.findById(id).get();
+    public ResponseEntity findById(@PathVariable String id){
+        ResponseEntity<?> response;
+        try {
+            response = ResponseEntity.ok(citaService.findById(id).getBody());
+        }  catch (Exception e) {
+            response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        return response;
+
     }
     @DeleteMapping("/cita/{id}")
-    public void deleteById(@PathVariable String id){
-        citaService.deleteById(id);
+    public ResponseEntity deleteById(@PathVariable String id){
+        ResponseEntity<?> response;
+        try {
+            response = citaService.deleteById(id);
+        }  catch (Exception e) {
+            response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        return response;
     }
 
-    @PutMapping("/citas")
+    @PutMapping("/cita")
     public  ResponseEntity update(@RequestBody Cita cita){
         ResponseEntity<?> response;
         try {

@@ -26,7 +26,7 @@ public class PacienteService {
                 return ResponseEntity.badRequest().body("El Paciente ya está registrado");
             } else {
                 pacienteRepository.save(paciente);
-                return ResponseEntity.ok().build();
+                return ResponseEntity.ok().body("Paciente agregado exitosamente");
             }
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al guardar el paciente", e);
@@ -34,14 +34,34 @@ public class PacienteService {
     }
 
     // Recupera todos los pacientes registrados en el sistema
-    public List<Paciente> findAll() {
-        return pacienteRepository.findAll();
+    public ResponseEntity<?> findAll() {
+        try {
+            List<Paciente> pacientes = pacienteRepository.findAll();
+            if (pacientes.isEmpty()) {
+                return ResponseEntity.badRequest().body("No se encontraron pacientes");
+            }
+            return ResponseEntity.ok(pacientes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     // Busca un paciente por su identificador
-    public Optional<Paciente> findById(String id) {
-        return pacienteRepository.findById(id);
+    public ResponseEntity<?> findById(String id) {
+        try {
+            Optional<Paciente> paciente = pacienteRepository.findById(id);
+        if (paciente.isEmpty()) {
+            return ResponseEntity.badRequest().body("No se encontro paciente");
+        }
+        return ResponseEntity.ok(paciente);
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
+    }
+
+
+
+
 
     // Elimina un paciente por su identificador, si no tiene citas pendientes
     public ResponseEntity deleteById(String id) {
@@ -51,7 +71,7 @@ public class PacienteService {
                 return ResponseEntity.badRequest().body("No puedes borrar al paciente porque tiene citas pendientes");
             } else {
                 pacienteRepository.deleteById(id);
-                return ResponseEntity.ok().build();
+                return ResponseEntity.ok().body("Paciente eliminado correctamente");
             }
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al borrar el paciente", e);
