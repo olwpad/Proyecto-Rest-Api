@@ -1,4 +1,4 @@
-# Proyecto-Rest-Api
+# Proyecto-Rest-Api :smiley: 
 
 Este proyecto está diseñado para fortalecer los conocimientos en API REST. Permite el registro de pacientes, doctores y citas, así como la posibilidad de editar y eliminar dichos registros. :clipboard:
 
@@ -65,7 +65,7 @@ A continuación, se detallan los pasos para configurar y ejecutar el proyecto en
 
 1.:open_file_folder: Clona el repositorio desde [https://github.com/olwpad/Proyecto-Rest-Api](https://github.com/olwpad/Proyecto-Eps-Rest-Api.git).
 
-2 :arrow_forward: Ejecuta en tu entorno de desarrollo.
+2 :arrow_forward: Corre el proyecto.
 
 3 :white_check_mark: Prueba y testea la API con Postman. Tienes en la carpeta "jsons", ejemplos para que pruebes.
 
