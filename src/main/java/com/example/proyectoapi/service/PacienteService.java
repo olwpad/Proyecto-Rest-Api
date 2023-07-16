@@ -89,10 +89,11 @@ public class PacienteService {
                 if (pacienteExistente != null) {
                     pacienteExistente.setEmail(paciente.getEmail());
                     pacienteExistente.setTelefono(paciente.getTelefono());
+                    pacienteRepository.save(pacienteExistente);
                 } else {
                     return ResponseEntity.badRequest().body("El paciente  no existe");
                 }
-                return ResponseEntity.ok().build();
+                return ResponseEntity.ok().body("Paciente editado correctamente");
             }
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar el paciente", e);

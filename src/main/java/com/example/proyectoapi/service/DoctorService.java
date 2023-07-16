@@ -88,7 +88,6 @@ public class DoctorService {
                 if (doctorExistente != null) {
                     // Establecer los nuevos valores en el doctor existente
                     doctorExistente.setConsultorio(doctor.getConsultorio());
-                    doctorExistente.setEspecialidad(doctor.getEspecialidad());
                     doctorExistente.setEmail(doctor.getEmail());
                     doctorRepository.save(doctorExistente);
                 } else {

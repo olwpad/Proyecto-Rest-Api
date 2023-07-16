@@ -24,21 +24,25 @@ public class CitaService {
         try {
             boolean existeDoctor = doctorRepository.existsById(cita.getCedulaDoctor());
             boolean existePaciente = pacienteRepository.existsById(cita.getNumeroDeCedula());
-            if (!existeDoctor && !existePaciente) {
+            boolean existeCita = citaRepository.existsById(cita.getId());
+
+            if (existeCita) {
+                return ResponseEntity.badRequest().body("La cita ya está registrada.");
+            } else if (!existeDoctor && !existePaciente) {
                 return ResponseEntity.badRequest().body("El doctor no está registrado y tampoco el paciente.");
             } else if (!existeDoctor) {
                 return ResponseEntity.badRequest().body("El doctor no está registrado.");
             } else if (!existePaciente) {
                 return ResponseEntity.badRequest().body("El paciente no está registrado.");
-            }else{
+            } else {
                 citaRepository.save(cita);
                 return ResponseEntity.ok().body("Cita agregada exitosamente");
             }
-
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al guardar la cita", e);
         }
     }
+
 
     public ResponseEntity<?> findAll() {
         try {
@@ -101,7 +105,7 @@ public class CitaService {
                 // Si la cita existe, actualiza los datos de la cita con los valores proporcionados
                 if (citaExistente.isPresent()) {
                     Cita cita = citaExistente.get();
-                    cita.setEspecialidad(citaActualizada.getEspecialidad());
+                    cita.setId(citaActualizada.getId());
                     cita.setHora(citaActualizada.getHora());
                     citaRepository.save(cita);
                     return ResponseEntity.ok().body("cita editada correctamente");
