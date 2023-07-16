@@ -33,23 +33,23 @@ El proyecto hace uso de las siguientes tecnologías y herramientas:
 A continuación se muestran los endpoints disponibles en esta API, junto con las acciones asociadas a cada uno. Tenga en cuenta que los verbos HTTP (POST, GET, DELETE, PUT) se mencionan para indicar las acciones correspondientes a cada endpoint, pero deben eliminarse al utilizarlos:`.
 
 ### Citas :calendar:
-- `POST /api/v1/citas`: Crea una nueva cita en la base de datos.
+- `POST /api/v1/cita`: Crea una nueva cita en la base de datos.
 - `GET /api/v1/citas`: Obtiene todas las citas registradas en la base de datos.
 - `GET /api/v1/cita/{id}`: Obtiene los datos de una cita específica según su ID.
 - `DELETE /api/v1/cita/{id}`: Elimina una cita específica de la base de datos según su ID.
-- `PUT /api/v1/citas`: Actualiza los datos de una cita específica en la base de datos.
+- `PUT /api/v1/cita`: Actualiza los datos de una cita específica en la base de datos.
 ### Doctores :man_health_worker:
-- `POST /api/v1/doctores`: Crea un nuevo doctor en la base de datos.
+- `POST /api/v1/doctor`: Crea un nuevo doctor en la base de datos.
 - `GET /api/v1/doctores`: Obtiene todos los doctores registrados en la base de datos.
 - `GET /api/v1/doctor/{id}`: Obtiene los datos de un doctor específico según su ID.
 - `DELETE /api/v1/doctor/{id}`: Elimina un doctor específico de la base de datos según su ID.
-- `PUT /api/v1/doctores`: Actualiza los datos de un doctor específico en la base de datos.
+- `PUT /api/v1/doctor`: Actualiza los datos de un doctor específico en la base de datos.
 ### Pacientes :woman_health_worker:
-- `POST /api/v1/pacientes`: Crea un nuevo paciente en la base de datos.
+- `POST /api/v1/paciente`: Crea un nuevo paciente en la base de datos.
 - `GET /api/v1/pacientes`: Obtiene todos los pacientes registrados en la base de datos.
 - `GET /api/v1/paciente/{id}`: Obtiene los datos de un paciente específico según su ID.
 - `DELETE /api/v1/paciente/{id}`: Elimina un paciente específico de la base de datos según su ID.
-- `PUT /api/v1/pacientes`: Actualiza los datos de un paciente específico en la base de datos.
+- `PUT /api/v1/paciente`: Actualiza los datos de un paciente específico en la base de datos.
   
 Recuerda reemplazar `{id}` en los endpoints que lo requieren con el ID correspondiente.
 
