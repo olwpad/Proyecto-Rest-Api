@@ -54,7 +54,7 @@ A continuación se muestran los endpoints disponibles en esta API, junto con las
 - `DELETE /api/v1/paciente/{id}`: Elimina un paciente específico de la base de datos según su ID.
 - `PUT /api/v1/paciente`: Actualiza los datos de un paciente específico en la base de datos.
   
-Recuerda reemplazar `{id}`  en los endpoints que lo requieren con el ID correspondiente. Tambien, recuerda agregar al final de cada endpoint http://localhost:8080
+Recuerda reemplazar `{id}`  en los endpoints que lo requieren con el ID correspondiente. Tambien, recuerda agregar al comienzo de cada endpoint http://localhost:8080
 
 ## Pruebas 
 [:bulb: Prueba del proyecto](https://www.youtube.com/watch?v=5YHeCzB2IU8)
